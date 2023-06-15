@@ -14,6 +14,7 @@
 
 import pandas as pd
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 fraud_train = pd.read_csv('data/fraudTrain.csv')
 fraud_test = pd.read_csv('data/fraudTest.csv')
@@ -77,5 +78,11 @@ sns.countplot(data=fraud_train, x='is_fraud')
 sns.countplot(data=fraud_test, x='is_fraud')
 
 # # Univariate analysis
+
+# ## Bar plot for gender
+
+sns.countplot(x='gender', data=fraud_train)
+plt.title('Gender Distribution')
+plt.show()
 
 
