@@ -85,4 +85,10 @@ sns.countplot(x='gender', data=fraud_train)
 plt.title('Gender Distribution')
 plt.show()
 
+# ## Histogram for `amt`
+
+sns.histplot(x='amt', data=fraud_train, bins=30)
+plt.title("amt Distribution")
+plt.show()
+
 
