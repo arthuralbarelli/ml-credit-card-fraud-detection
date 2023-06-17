@@ -12,12 +12,28 @@
 #     name: python3
 # ---
 
+# # 1.Import Libraries
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+# # 2. Load Data
+
 fraud_train = pd.read_csv('data/fraudTrain.csv')
 fraud_test = pd.read_csv('data/fraudTest.csv')
+
+
+# ## a. Check if the both datasets have the same columns:
+
+def match_dataframe_columns(df_train, df_test):
+    try:
+        return(all(df_train.columns == df_test.columns))
+    except:
+        return(False)
+
+
+match_dataframe_columns(fraud_train, fraud_test)
 
 # # Data Overview
 
