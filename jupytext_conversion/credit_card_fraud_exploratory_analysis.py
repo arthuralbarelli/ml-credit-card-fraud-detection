@@ -35,6 +35,10 @@ def match_dataframe_columns(df_train, df_test):
 
 match_dataframe_columns(fraud_train, fraud_test)
 
+# ## b. Append train and test dataset
+
+fraud_data = pd.concat([fraud_train, fraud_test], ignore_index=False)
+
 # # Data Overview
 
 # ## Train
