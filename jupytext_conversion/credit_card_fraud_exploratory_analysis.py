@@ -14,9 +14,13 @@
 
 # # 1.Import Libraries
 
+# +
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+
+pd.set_option('')
+# -
 
 # # 2. Load Data
 
@@ -38,6 +42,8 @@ match_dataframe_columns(fraud_train, fraud_test)
 # ## b. Append train and test dataset
 
 fraud_data = pd.concat([fraud_train, fraud_test], ignore_index=False)
+
+fraud_data.head()
 
 # # Data Overview
 
