@@ -12,14 +12,14 @@
 #     name: python3
 # ---
 
-# # 1.Import Libraries
+# # 1. Import Libraries
 
 # +
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-pd.set_option('')
+pd.set_option('display.max_columns', None)
 # -
 
 # # 2. Load Data
@@ -44,6 +44,19 @@ match_dataframe_columns(fraud_train, fraud_test)
 fraud_data = pd.concat([fraud_train, fraud_test], ignore_index=False)
 
 fraud_data.head()
+
+# # 3. Exploratory Data Analysis
+
+# ## a. Handling duplicates
+
+duplicate_rows_data = fraud_data[fraud_data.duplicated()]
+print("Number of duplicated rows: ", duplicate_rows_data.shape)
+
+# ## b. Uniqueness
+
+for column in fraud_data.columns:
+    num_distinct_values = len(fraud_data[column].unique())
+    print(f"{column}: {num_distinct_values} distinct values")
 
 # # Data Overview
 
