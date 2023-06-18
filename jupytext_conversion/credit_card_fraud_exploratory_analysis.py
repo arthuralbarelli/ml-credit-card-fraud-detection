@@ -58,6 +58,12 @@ for column in fraud_data.columns:
     num_distinct_values = len(fraud_data[column].unique())
     print(f"{column}: {num_distinct_values} distinct values")
 
+# ## c. Missing values
+
+print(fraud_data.isnull().sum())
+
+
+
 # # Data Overview
 
 # ## Train
