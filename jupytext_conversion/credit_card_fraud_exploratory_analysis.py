@@ -62,7 +62,9 @@ for column in fraud_data.columns:
 
 print(fraud_data.isnull().sum())
 
+# ## d. Describe data
 
+fraud_data.describe().style.format('{:.2f}')
 
 # # Data Overview
 
