@@ -45,7 +45,19 @@ fraud_data = pd.concat([fraud_train, fraud_test], ignore_index=False)
 
 fraud_data.head()
 
-# # 3. Exploratory Data Analysis
+fraud_data.tail()
+
+# # 3. Cleaning Data
+
+# ## a. Checking types
+
+fraud_data.info()
+
+processed_fraud_data = fraud_data.drop(columns=['Unnamed: 0'], axis=1)
+
+
+
+# # 4. Exploratory Data Analysis
 
 # ## a. Handling duplicates
 
