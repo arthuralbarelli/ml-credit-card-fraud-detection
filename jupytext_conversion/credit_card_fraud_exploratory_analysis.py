@@ -53,6 +53,27 @@ fraud_data.info()
 
 fraud_data.drop(columns=['Unnamed: 0'], inplace=True)
 
+new_types = {
+    'cc_num': 'string',
+    'merchant': 'string',
+    'category': 'category',
+    'first': 'string',
+    'last': 'string',
+    'gender': 'category',
+    'street': 'string',
+    'city': 'string',
+    'state': 'string',
+    'zip': 'string',
+    'job': 'string',
+    'dob': 'string',
+    'trans_num': 'string',
+    'is_fraud': 'bool'
+}
+fraud_data = fraud_data.astype(new_types, copy=False)
+fraud_data['trans_date_trans_time'] = pd.to_datetime(fraud_data['trans_date_trans_time'], format='%Y-%m-%d %H:%M:%S')
+
+fraud_data.info()
+
 # # 4. Exploratory Data Analysis
 
 # ## a. Handling duplicates
