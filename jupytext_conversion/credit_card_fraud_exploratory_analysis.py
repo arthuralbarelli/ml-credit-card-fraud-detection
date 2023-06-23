@@ -97,7 +97,11 @@ fraud_data.describe().style.format('{:.2f}')
 
 # # Univariate analysis
 
-# ## Bar plot for gender
+# ## Plot distribution of non-numerical features
+
+for column in fraud_data.columns:
+    if not pd.api.types.is_numeric_dtype(fraud_data[column]):
+        print(column)
 
 sns.countplot(x='gender', data=fraud_train)
 plt.title('Gender Distribution')
