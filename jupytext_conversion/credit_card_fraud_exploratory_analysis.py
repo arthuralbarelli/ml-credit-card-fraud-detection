@@ -76,24 +76,41 @@ fraud_data.describe().style.format('{:.2f}')
 
 # ## B) Univariate Analysis
 
-# ## Plot distribution of non-numerical features
+# ### a. Bar plot for merchant
 
-for column in fraud_data.columns:
-    df_column = fraud_data[column]
-    if is_categorical_dtype(df_column):
-        sns.countplot(data=fraud_data, x=df_column)
-        plt.show()
+sns.countplot(x='category', data=fraud_data)
+plt.title('Category distribution')
+plt.xticks(rotation=90)
+plt.show()
+
+# ### b. Histogram for amt
+
+plt.hist(fraud_data['amt'], edgecolor='black')
+plt.title('Amount Distribution')
+plt.xlabel('Amount')
+plt.ylabel('Count')
+plt.show()
+
+# ### c. Bar plot for gender
+
+sns.countplot(x='gender', data=fraud_data)
+plt.title('Gender distribution')
+plt.show()
+
+# ### d. Bar plot for state
+
+plt.figure(figsize=(20, 10))
+sns.countplot(x='state', data=fraud_data)
+plt.title('State distribution')
+plt.xticks(rotation=90)
+plt.show()
+
+# ### e. Bar plot for is_fraud
+
+sns.countplot(x='is_fraud', data=fraud_data)
+plt.title('Fraud distribution')
+plt.show()
 
 fraud_data.head()
-
-sns.countplot(x='gender', data=fraud_train)
-plt.title('Gender Distribution')
-plt.show()
-
-# ## Histogram for `amt`
-
-sns.histplot(x='amt', data=fraud_train, bins=30)
-plt.title("amt Distribution")
-plt.show()
 
 
