@@ -19,6 +19,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+from pandas.api.types import is_string_dtype, is_bool_dtype, is_categorical_dtype
+
 pd.set_option('display.max_columns', None)
 # -
 
@@ -49,49 +51,26 @@ fraud_data.tail()
 
 fraud_data.info()
 
-# # 3. Clean Data
-
-fraud_data.drop(columns=['Unnamed: 0'], inplace=True)
-
-new_types = {
-    'cc_num': 'string',
-    'merchant': 'string',
-    'category': 'category',
-    'first': 'string',
-    'last': 'string',
-    'gender': 'category',
-    'street': 'string',
-    'city': 'string',
-    'state': 'string',
-    'zip': 'string',
-    'job': 'string',
-    'dob': 'string',
-    'trans_num': 'string',
-    'is_fraud': 'bool'
-}
-fraud_data = fraud_data.astype(new_types, copy=False)
-fraud_data['trans_date_trans_time'] = pd.to_datetime(fraud_data['trans_date_trans_time'], format='%Y-%m-%d %H:%M:%S')
-
-fraud_data.info()
-
 # # 4. Exploratory Data Analysis
 
-# ## a. Handling duplicates
+# ## Data Quality
+
+# ###  a. Handling duplicates
 
 duplicate_rows_data = fraud_data[fraud_data.duplicated()]
 print("Number of duplicated rows: ", duplicate_rows_data.shape)
 
-# ## b. Uniqueness
+# ### b. Uniqueness
 
 for column in fraud_data.columns:
     num_distinct_values = len(fraud_data[column].unique())
     print(f"{column}: {num_distinct_values} distinct values")
 
-# ## c. Missing values
+# ### c. Missing values
 
 print(fraud_data.isnull().sum())
 
-# ## d. Describe data
+# ### d. Describe data
 
 fraud_data.describe().style.format('{:.2f}')
 
@@ -100,9 +79,12 @@ fraud_data.describe().style.format('{:.2f}')
 # ## Plot distribution of non-numerical features
 
 for column in fraud_data.columns:
-    if not (pd.api.types.is_numeric_dtype(fraud_data[column]) or pd.api.types.is_datetime64_any_dtype(fraud_data[column])):
-        print(column)
+    df_column = fraud_data[column]
+    if is_categorical_dtype(df_column):
+        sns.countplot(data=fraud_data, x=df_column)
+        plt.show()
 
+fraud_data.head()
 
 sns.countplot(x='gender', data=fraud_train)
 plt.title('Gender Distribution')
