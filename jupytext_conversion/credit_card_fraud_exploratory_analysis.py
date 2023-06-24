@@ -53,7 +53,7 @@ fraud_data.info()
 
 # # 4. Exploratory Data Analysis
 
-# ## Data Quality
+# ## A) Data Quality
 
 # ###  a. Handling duplicates
 
@@ -74,7 +74,7 @@ print(fraud_data.isnull().sum())
 
 fraud_data.describe().style.format('{:.2f}')
 
-# # Univariate analysis
+# ## B) Univariate Analysis
 
 # ## Plot distribution of non-numerical features
 
