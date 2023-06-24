@@ -100,8 +100,9 @@ fraud_data.describe().style.format('{:.2f}')
 # ## Plot distribution of non-numerical features
 
 for column in fraud_data.columns:
-    if not pd.api.types.is_numeric_dtype(fraud_data[column]):
+    if not (pd.api.types.is_numeric_dtype(fraud_data[column]) or pd.api.types.is_datetime64_any_dtype(fraud_data[column])):
         print(column)
+
 
 sns.countplot(x='gender', data=fraud_train)
 plt.title('Gender Distribution')
