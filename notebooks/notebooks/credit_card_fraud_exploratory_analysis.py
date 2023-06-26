@@ -111,6 +111,12 @@ sns.countplot(x='is_fraud', data=fraud_data)
 plt.title('Fraud distribution')
 plt.show()
 
+# ## C) Bivariate Analysis
 
+# ### a. Boxplot Amount vs Fraud Classification
+
+sns.boxplot(x='is_fraud', y='amt', data=fraud_data)
+plt.title("Amount vs Fraud")
+plt.show()
 
 
