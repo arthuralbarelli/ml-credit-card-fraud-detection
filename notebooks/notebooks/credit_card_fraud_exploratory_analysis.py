@@ -119,4 +119,8 @@ sns.boxplot(x='is_fraud', y='amt', data=fraud_data)
 plt.title("Amount vs Fraud")
 plt.show()
 
+# ### b. Count plot for gender vs fraud
 
+sns.countplot(x='gender', hue='is_fraud', data=fraud_data)
+plt.title("Gender vs Fraud")
+plt.show()
