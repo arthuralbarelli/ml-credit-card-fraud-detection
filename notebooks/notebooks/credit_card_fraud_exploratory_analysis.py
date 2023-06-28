@@ -124,3 +124,12 @@ plt.show()
 sns.countplot(x='gender', hue='is_fraud', data=fraud_data)
 plt.title("Gender vs Fraud")
 plt.show()
+
+# ### c. Count plot for category
+
+sns.countplot(x='category', hue='is_fraud', data=fraud_data)
+plt.title("Category vs Fraud")
+plt.xticks(rotation=90)
+plt.show()
+
+
