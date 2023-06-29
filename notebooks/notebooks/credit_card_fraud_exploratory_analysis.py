@@ -132,4 +132,11 @@ plt.title("Category vs Fraud")
 plt.xticks(rotation=90)
 plt.show()
 
+# ### d. State vs Fraud 
+
+plt.figure(figsize=(15,10))
+sns.countplot(y='state', hue='is_fraud', data=fraud_data)
+plt.title("State vs Fraud")
+plt.show()
+
 
