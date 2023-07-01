@@ -15,6 +15,7 @@
 # # 1. Import Libraries
 
 # +
+import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -26,9 +27,27 @@ pd.set_option('display.max_columns', None)
 
 # # 2. Load Data
 
-fraud_train = pd.read_csv('data/fraudTrain.csv')
-fraud_test = pd.read_csv('data/fraudTest.csv')
+# +
+local_path = '../data/'
+kaggle_path = '/kaggle/input/fraud-detection/'
 
+def identify_data_path():
+    if os.path.exists(local_path):
+        return local_path
+    elif os.path.exists(kaggle_path):
+        return kaggle_path
+
+
+# +
+avaiable_path = identify_data_path()
+train_data = os.path.join(avaiable_path, 'fraudTrain.csv')
+test_data =  os.path.join(avaiable_path, 'fraudTest.csv')
+
+fraud_train = pd.read_csv(train_data)
+fraud_test = pd.read_csv(test_data)
+
+
+# -
 
 # ## a. Check if the both datasets have the same columns:
 
@@ -111,6 +130,39 @@ sns.countplot(x='is_fraud', data=fraud_data)
 plt.title('Fraud distribution')
 plt.show()
 
-fraud_data.head()
+# ## C) Bivariate Analysis
+
+# ### a. Boxplot Amount vs Fraud Classification
+
+sns.boxplot(x='is_fraud', y='amt', data=fraud_data)
+plt.title("Amount vs Fraud")
+plt.show()
+
+# ### b. Count plot for gender vs fraud
+
+sns.countplot(x='gender', hue='is_fraud', data=fraud_data)
+plt.title("Gender vs Fraud")
+plt.show()
+
+# ### c. Count plot for category
+
+sns.countplot(x='category', hue='is_fraud', data=fraud_data)
+plt.title("Category vs Fraud")
+plt.xticks(rotation=90)
+plt.show()
+
+# ### d. State vs Fraud 
+
+plt.figure(figsize=(15,10))
+sns.countplot(y='state', hue='is_fraud', data=fraud_data)
+plt.title("State vs Fraud")
+plt.show()
+
+# ## D) Multivariate Analysis
+
+# ### a. Violinplot of Amount against fraud classfication split by gender
+
+sns.violinplot(x='is_fraud', y='amt', hue='gender', data=fraud_data)
+plt.title('Fraud vs 
 
 
