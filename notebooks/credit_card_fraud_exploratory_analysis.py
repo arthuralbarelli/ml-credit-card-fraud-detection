@@ -19,6 +19,7 @@ import os
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 from pandas.api.types import is_string_dtype, is_bool_dtype, is_categorical_dtype
 
@@ -93,7 +94,13 @@ print(fraud_data.isnull().sum())
 
 fraud_data.describe().style.format('{:.2f}')
 
-# ## B) Univariate Analysis
+# ## C) Data Preparation
+
+transaction_date = pd.to_datetime(fraud_data['trans_date_trans_time'])
+birth_date =  pd.to_datetime(fraud_data['dob'])
+fraud_data['age'] = (transaction_date -birth_date) / np.timedelta64(1, 'Y')
+
+# ## D) Univariate Analysis
 
 # ### a. Bar plot for merchant
 
