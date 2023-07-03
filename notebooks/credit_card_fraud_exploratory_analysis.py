@@ -171,11 +171,16 @@ sns.countplot(y='state', hue='is_fraud', data=fraud_data)
 plt.title("State vs Fraud")
 plt.show()
 
+# ### e. Boxplot Age vs Fraud
+
+sns.boxplot(y='age', x='is_fraud', data=fraud_data)
+plt.title('Age vs Fraud')
+plt.show()
+
 # ## D) Multivariate Analysis
 
 # ### a. Violinplot of Amount against fraud classfication split by gender
 
 sns.violinplot(x='is_fraud', y='amt', hue='gender', data=fraud_data)
-plt.title('Fraud vs 
-
-
+plt.title('Fraud vs Amount split by Gender')
+plt.show()
