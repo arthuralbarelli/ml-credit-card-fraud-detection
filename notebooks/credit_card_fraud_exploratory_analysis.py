@@ -131,6 +131,12 @@ plt.title('State distribution')
 plt.xticks(rotation=90)
 plt.show()
 
+# ### Histogram for age
+
+plt.hist(fraud_data['age'], edgecolor='black')
+plt.title('Age Distribution')
+plt.show()
+
 # ### e. Bar plot for is_fraud
 
 sns.countplot(x='is_fraud', data=fraud_data)
