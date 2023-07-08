@@ -191,4 +191,10 @@ sns.violinplot(x='is_fraud', y='age', hue='gender', data=fraud_data)
 plt.title('Fraud vs Age Split By Gender')
 plt.show()
 
+# ### c. Scatterplot Age vs Amounts vs Fraud
+
+sns.scatterplot(data=fraud_data, x='amt', y='age', hue='is_fraud')
+plt.title('Amount vs Age vs Fraud')
+plt.show()
+
 
