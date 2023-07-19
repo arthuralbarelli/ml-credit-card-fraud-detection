@@ -197,7 +197,13 @@ sns.scatterplot(data=fraud_data, x='amt', y='age', hue='is_fraud')
 plt.title('Amount vs Age vs Fraud')
 plt.show()
 
-# ## E) Correlation
+# ## E) Processing
+
+processed_df = pd.get_dummies(data=fraud_data, columns=['state', 'gender'], drop_first=True)
+
+processed_df.head()
+
+# ## F) Correlation
 
 correlation_matrix = fraud_data[['is_fraud', 'age', 'amt']].corr()
 plt.figure(figsize=(15, 10))
