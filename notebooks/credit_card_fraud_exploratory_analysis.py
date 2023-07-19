@@ -71,7 +71,11 @@ fraud_data.tail()
 
 fraud_data.info()
 
-# # 4. Exploratory Data Analysis
+# # 4. Data Clean Up
+
+fraud_data['name'] = fraud_data['first'] + ' ' + fraud_data['last']
+
+# # 5. Exploratory Data Analysis
 
 # ## A) Data Quality
 
@@ -208,3 +212,5 @@ processed_df.head()
 correlation_matrix = fraud_data[['is_fraud', 'age', 'amt']].corr()
 plt.figure(figsize=(15, 10))
 sns.heatmap(data=correlation_matrix, annot=True)
+
+
