@@ -21,8 +21,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
-from pandas.api.types import is_string_dtype, is_bool_dtype, is_categorical_dtype
-
 pd.set_option('display.max_columns', None)
 # -
 
@@ -75,9 +73,9 @@ fraud_data.info()
 
 # +
 fraud_data['name'] = fraud_data['first'] + ' ' + fraud_data['last']
+
 fraud_data['trans_date_trans_time'] = pd.to_datetime(fraud_data['trans_date_trans_time'])
 fraud_data['dob'] = pd.to_datetime(fraud_data['dob'])
-    
 fraud_data['age_years'] = (fraud_data['trans_date_trans_time'] - fraud_data['dob']).dt.days / 365.25
 # -
 
