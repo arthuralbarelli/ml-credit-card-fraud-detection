@@ -75,11 +75,10 @@ fraud_data.info()
 # +
 fraud_data['name'] = fraud_data['first'] + ' ' + fraud_data['last']
 
-fraud_data['trans_date_trans_time'] = pd.to_datetime(
-    fraud_data['trans_date_trans_time'])
-fraud_data['dob'] = pd.to_datetime(fraud_data['dob'])
-user_age = fraud_data['trans_date_trans_time'] - fraud_data['dob']
-fraud_data['age_years'] = user_age.dt.days / 365.25
+transaction_date = pd.to_datetime(fraud_data['trans_date_trans_time'])
+birth_date = pd.to_datetime(fraud_data['dob'])
+year_timedelta = np.timedelta64(1, 'Y')
+fraud_data['age_years'] = (transaction_date - birth_date) / year_timedelta
 # -
 
 # # 5. Exploratory Data Analysis
@@ -107,9 +106,7 @@ fraud_data.describe().style.format('{:.2f}')
 
 # ## C) Data Preparation
 
-transaction_date = pd.to_datetime(fraud_data['trans_date_trans_time'])
-birth_date =  pd.to_datetime(fraud_data['dob'])
-fraud_data['age'] = (transaction_date -birth_date) / np.timedelta64(1, 'Y')
+
 
 # ## D) Univariate Analysis
 
@@ -144,7 +141,7 @@ plt.show()
 
 # ### Histogram for age
 
-plt.hist(fraud_data['age'], edgecolor='black')
+plt.hist(fraud_data['age_years'], edgecolor='black')
 plt.title('Age Distribution')
 plt.show()
 
@@ -184,7 +181,7 @@ plt.show()
 
 # ### e. Boxplot Age vs Fraud
 
-sns.boxplot(y='age', x='is_fraud', data=fraud_data)
+sns.boxplot(y='age_years', x='is_fraud', data=fraud_data)
 plt.title('Age vs Fraud')
 plt.show()
 
@@ -198,13 +195,13 @@ plt.show()
 
 # ### b. Violin plot of Age against fraud classification split by gender
 
-sns.violinplot(x='is_fraud', y='age', hue='gender', data=fraud_data)
+sns.violinplot(x='is_fraud', y='age_years', hue='gender', data=fraud_data)
 plt.title('Fraud vs Age Split By Gender')
 plt.show()
 
 # ### c. Scatterplot Age vs Amounts vs Fraud
 
-sns.scatterplot(data=fraud_data, x='amt', y='age', hue='is_fraud')
+sns.scatterplot(data=fraud_data, x='amt', y='age_years', hue='is_fraud')
 plt.title('Amount vs Age vs Fraud')
 plt.show()
 
@@ -220,6 +217,6 @@ processed_df.head()
 
 # ## F) Correlation
 
-correlation_matrix = fraud_data[['is_fraud', 'age', 'amt']].corr()
+correlation_matrix = fraud_data[['is_fraud', 'age_years', 'amt']].corr()
 plt.figure(figsize=(15, 10))
 sns.heatmap(data=correlation_matrix, annot=True)
