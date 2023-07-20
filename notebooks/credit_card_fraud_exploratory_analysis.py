@@ -30,6 +30,7 @@ pd.set_option('display.max_columns', None)
 local_path = '../data/'
 kaggle_path = '/kaggle/input/fraud-detection/'
 
+
 def identify_data_path():
     if os.path.exists(local_path):
         return local_path
@@ -40,7 +41,7 @@ def identify_data_path():
 # +
 avaiable_path = identify_data_path()
 train_data = os.path.join(avaiable_path, 'fraudTrain.csv')
-test_data =  os.path.join(avaiable_path, 'fraudTest.csv')
+test_data = os.path.join(avaiable_path, 'fraudTest.csv')
 
 fraud_train = pd.read_csv(train_data)
 fraud_test = pd.read_csv(test_data)
@@ -74,9 +75,11 @@ fraud_data.info()
 # +
 fraud_data['name'] = fraud_data['first'] + ' ' + fraud_data['last']
 
-fraud_data['trans_date_trans_time'] = pd.to_datetime(fraud_data['trans_date_trans_time'])
+fraud_data['trans_date_trans_time'] = pd.to_datetime(
+    fraud_data['trans_date_trans_time'])
 fraud_data['dob'] = pd.to_datetime(fraud_data['dob'])
-fraud_data['age_years'] = (fraud_data['trans_date_trans_time'] - fraud_data['dob']).dt.days / 365.25
+user_age = fraud_data['trans_date_trans_time'] - fraud_data['dob']
+fraud_data['age_years'] = user_age.dt.days / 365.25
 # -
 
 # # 5. Exploratory Data Analysis
@@ -207,7 +210,11 @@ plt.show()
 
 # ## E) Processing
 
-processed_df = pd.get_dummies(data=fraud_data, columns=['state', 'gender'], drop_first=True)
+processed_df = pd.get_dummies(
+    data=fraud_data,
+    columns=['state', 'gender'],
+    drop_first=True
+)
 
 processed_df.head()
 
@@ -216,5 +223,3 @@ processed_df.head()
 correlation_matrix = fraud_data[['is_fraud', 'age', 'amt']].corr()
 plt.figure(figsize=(15, 10))
 sns.heatmap(data=correlation_matrix, annot=True)
-
-
