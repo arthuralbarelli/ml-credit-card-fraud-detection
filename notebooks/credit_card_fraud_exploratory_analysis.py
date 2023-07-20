@@ -73,7 +73,13 @@ fraud_data.info()
 
 # # 4. Data Clean Up
 
+# +
 fraud_data['name'] = fraud_data['first'] + ' ' + fraud_data['last']
+fraud_data['trans_date_trans_time'] = pd.to_datetime(fraud_data['trans_date_trans_time'])
+fraud_data['dob'] = pd.to_datetime(fraud_data['dob'])
+    
+fraud_data['age_years'] = (fraud_data['trans_date_trans_time'] - fraud_data['dob']).dt.days / 365.25
+# -
 
 # # 5. Exploratory Data Analysis
 
