@@ -79,6 +79,8 @@ transaction_date = pd.to_datetime(fraud_data['trans_date_trans_time'])
 birth_date = pd.to_datetime(fraud_data['dob'])
 year_timedelta = np.timedelta64(1, 'Y')
 fraud_data['age_years'] = (transaction_date - birth_date) / year_timedelta
+
+fraud_data.drop(columns=['Unnamed: 0'], inplace=True)
 # -
 
 # # 5. Exploratory Data Analysis
