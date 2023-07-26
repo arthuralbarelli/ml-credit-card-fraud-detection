@@ -21,6 +21,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import numpy as np
 
+from pandas.util import hash_pandas_object
+
 pd.set_option('display.max_columns', None)
 # -
 
@@ -73,7 +75,9 @@ fraud_data.info()
 # # 4. Data Clean Up
 
 # +
-fraud_data['name'] = fraud_data['first'] + ' ' + fraud_data['last']
+fraud_data['hash_name'] = hash_pandas_object(
+    fraud_data['first'] + ' ' + fraud_data['last']
+)
 
 transaction_date = pd.to_datetime(fraud_data['trans_date_trans_time'])
 birth_date = pd.to_datetime(fraud_data['dob'])
