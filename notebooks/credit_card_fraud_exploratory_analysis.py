@@ -87,7 +87,7 @@ fraud_data['age_years'] = (transaction_date - birth_date) / year_timedelta
 fraud_data['cc_num'] = fraud_data['cc_num'].astype('string')
 fraud_data['zip'] = fraud_data['zip'].astype('string')
 
-fraud_data.drop(columns=['Unnamed: 0', 'first', 'last'], inplace=True)
+fraud_data.drop(columns=['Unnamed: 0', 'first', 'last', 'gender'], inplace=True)
 # -
 
 # # 5. Exploratory Data Analysis
