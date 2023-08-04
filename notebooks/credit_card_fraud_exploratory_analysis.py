@@ -79,6 +79,10 @@ fraud_data['hash_name'] = hash_pandas_object(
     fraud_data['first'] + ' ' + fraud_data['last']
 ).astype('string')
 
+fraud_data['hash_merchant'] = hash_pandas_object(
+    fraud_data['merchant']
+).astype('string')
+
 transaction_date = pd.to_datetime(fraud_data['trans_date_trans_time'])
 birth_date = pd.to_datetime(fraud_data['dob'])
 year_timedelta = np.timedelta64(1, 'Y')
@@ -87,7 +91,7 @@ fraud_data['age_years'] = (transaction_date - birth_date) / year_timedelta
 fraud_data['cc_num'] = fraud_data['cc_num'].astype('string')
 fraud_data['zip'] = fraud_data['zip'].astype('string')
 
-fraud_data.drop(columns=['Unnamed: 0', 'first', 'last', 'gender'], inplace=True)
+fraud_data.drop(columns=['Unnamed: 0', 'first', 'last', 'gender', 'merchant'], inplace=True)
 # -
 
 # # 5. Exploratory Data Analysis
