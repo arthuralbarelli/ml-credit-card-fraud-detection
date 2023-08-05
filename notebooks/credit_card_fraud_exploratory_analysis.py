@@ -109,6 +109,13 @@ fraud_data['age_years'] = (transaction_date - birth_date) / year_timedelta
 fraud_data['cc_num'] = fraud_data['cc_num'].astype('string')
 fraud_data['zip'] = fraud_data['zip'].astype('string')
 
+fraud_data['km_distance'] = haversine_vectorize(
+    fraud_data['lat'],
+    fraud_data['long'],
+    fraud_data['merch_lat'],
+    fraud_data['merch_long']
+)
+
 fraud_data.drop(columns=['Unnamed: 0', 'first', 'last', 'gender', 'merchant'], inplace=True)
 # -
 
