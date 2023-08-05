@@ -24,7 +24,25 @@ import numpy as np
 from pandas.util import hash_pandas_object
 
 pd.set_option('display.max_columns', None)
+
+
 # -
+
+# # Creating functions
+
+def haversine_vectorize(lat_a, lng_a, lat_b, lng_b):
+
+    lat_a, lng_a, lat_b, lng_b = map(np.radians, [lat_a, lng_a, lat_b, lng_b])
+
+    diff_lng = lng_b - lng_b
+    diff_lat = lat_b - lat_a
+
+    haversine_formula = np.sin(diff_lat)**2 + np.cos(lat_a) * np.cos(lat_b) * np.sin(diff_lng/2.0)**2
+
+    dist = 2 * np.arcsin(np.sqrt(haversine_formula))
+    km = 6367 * dist
+    return km
+
 
 # # 2. Load Data
 
