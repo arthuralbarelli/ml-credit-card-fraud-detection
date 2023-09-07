@@ -142,6 +142,10 @@ print(fraud_data.isnull().sum())
 
 fraud_data.describe().style.format('{:.2f}')
 
+# ## What was the the total amount of fraudulent and non-fraudulent transactions?
+
+fraud_data.groupby('is_fraud').agg({'amt': 'sum'})
+
 # ## D) Univariate Analysis
 
 # ### a. Bar plot for merchant
