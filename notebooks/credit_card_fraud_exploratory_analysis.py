@@ -24,6 +24,7 @@ import numpy as np
 from pandas.util import hash_pandas_object
 
 pd.set_option('display.max_columns', None)
+pd.set_option('display.float_format', '{:2f}'.format)
 
 
 # -
